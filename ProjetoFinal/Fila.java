@@ -1,6 +1,6 @@
 
 public class Fila {
-
+    
 	private static int dimensaoFila = 0;
 	private static int[] fila = new int[dimensaoFila];
 
