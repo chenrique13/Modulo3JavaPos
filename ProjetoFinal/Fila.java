@@ -1,46 +1,67 @@
-import java.util.Scanner;
 
 public class Fila {
 
-	final int tamanhoFila = 6;
-	int indice = 0;
-	String arrayFila[] = new String[tamanhoFila];
+	private static int dimensaoFila = 0;
+	private static int[] fila = new int[dimensaoFila];
 
-	public void IserirNaFila() {
-		if (indice == tamanhoFila) {
-			System.out.println("Fila cheia!");
-		} else {
-			System.out.println("Digite o elemento a ser inserido: ");
-			arrayFila[indice] = new Scanner(System.in).next();
-			indice++;
+	public static void inserir(Integer senha) {
+
+		int[] filaAux = new int[fila.length];
+
+		for (int i = 0; i < filaAux.length; i++) {
+			filaAux[i] = fila[i];
 		}
+		dimensaoFila += 1;
+		fila = new int[dimensaoFila];
+		for (int i = 0; i < filaAux.length; i++) {
+			fila[i] = filaAux[i];
+		}
+		fila[dimensaoFila - 1] = senha;
 	}
 
-	public void RemoverFila() {
-		if (indice == 0) {
-			System.out.println("Fila Vazia! ");
-		}
-		if (indice == 1) {
-			indice = 0;
-		}
-		if (indice > 1) {
-			for (int i = 0; i < (indice - 1); ++i) {
-				arrayFila[i] = arrayFila[i + 1];
+	public static void remover() {
+		if (dimensaoFila >= 1) {
+			int[] filaAux = new int[fila.length];
+
+			for (int i = 0; i < fila.length; i++) {
+				filaAux[i] = fila[i];
 			}
-			indice--;
+			dimensaoFila -= 1;
+			fila = new int[dimensaoFila];
+			for (int i = 1; i < filaAux.length; i++) {
+				fila[i - 1] = filaAux[i];
+			}
+		}else {
+			System.out.println("Fila vazia!\n");
+		}
+	}
+	
+	public static void listar() {
+		for (int i = 0; i < dimensaoFila; i++) {
+			System.out.println( fila[i]);
+		}
+	}
+	
+	public static void insertioSort() {
+		for (int i = 0; i < getFila().length; i++) {
+			int elemento = getFila()[i];
+			int j = i-1;
+			
+			while ((j>=0) && (elemento<= getFila()[j])) {
+				getFila() [j+1] = getFila() [j];
+				j--;
+			}
+			getFila() [j+1] = elemento;
 		}
 	}
 
-	public void ExibirFila() {
-		System.out.println("Fila: ");
-		for (int i = 0; i < indice; ++i) {
-			System.out.println(arrayFila[i] + " ");
-		}
-		System.out.println("\n");
+	public static int[] getFila() {
+		return fila;
+		
 	}
 
-	public void LimparFila() {
-		System.out.println("Fila Limpa!");
-		indice = 0;
+	public static int getDimensaoFila() {
+		return dimensaoFila;
 	}
+	
 }
